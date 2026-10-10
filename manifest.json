@@ -1,0 +1,9 @@
+{
+  "name": "Tarla Takip • M.KOLUÇOLAK TARIM",
+  "short_name": "Tarla Takip",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101411",
+  "theme_color": "#0b522b",
+  "lang": "tr"
+}

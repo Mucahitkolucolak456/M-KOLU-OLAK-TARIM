@@ -1,0 +1,12 @@
+KOLUÇOLAK TARIM - CİHAZLAR ARASI SENKRONİZASYON
+
+ÖNEMLİ: Mevcut Netlify sitenizin üzerine yazmadan önce ayrı bir Netlify test sitesi oluşturup deneyin.
+
+1) Bu ZIP'i ayrı bir klasöre çıkarın. İçinde index.html, manifest.json, sw.js, traktor-kolucolak.jpeg ve bu açıklama dosyası vardır.
+2) Netlify test sitesine bu klasörün içeriğini yükleyin.
+3) Sitede üst kısımdaki Senkronizasyon paneline Project URL ve Publishable key girin. Bu bilgiler cihazda tarayıcı depolamasında tutulur. Secret/service_role anahtarı kullanmayın.
+4) Her cihazda aynı Supabase hesabı (aynı e-posta/şifre) ile giriş yapın. E-posta doğrulaması açıksa önce e-postayı doğrulayın.
+5) İlk giriş yapılan cihazdaki yerel kayıtlar, hesapta daha önce bulut kaydı yoksa buluta aktarılır. Diğer cihazlarda buluttaki kayıtlar indirilir.
+6) Supabase SQL Editor'de SUPABASE-KURULUM.sql başarıyla çalıştırılmış olmalı.
+
+UYARI: Bu uygulama tüm uygulama verisini tek JSON belgesi olarak eşitler; iki cihazda aynı anda yapılan değişikliklerde son yazan kayıt diğerinin üzerine geçebilir. İlk testte gerçek/veri kaybı riski olan kayıtlar yerine deneme verisi kullanın ve Yedek Al özelliğiyle yedek alın. İnternet gerekir.

@@ -1,0 +1,541 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#166534">
+<link rel="manifest" href="manifest.json">
+<title>Tarla Takip • M.KOLUÇOLAK TARIM</title>
+<style>
+*{box-sizing:border-box}
+:root{--green:#166534;--green2:#0f4d28;--light:#f3f7f4;--border:#dce6df;--text:#18231c;--muted:#68756d}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#101411;color:var(--text);min-height:100vh}
+body:before{content:"";position:fixed;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(5,10,8,.42),rgba(5,10,8,.64)),url("traktor-kolucolak.jpeg") center 43%/cover no-repeat;}
+html{min-height:100%;background:#101411}
+button,input,select,textarea{font:inherit}
+header{background:linear-gradient(115deg,rgba(3,29,16,.94),rgba(15,77,40,.91) 55%,rgba(5,49,25,.94));color:#fff;padding:13px 22px;position:sticky;top:0;z-index:20;box-shadow:0 3px 14px #0002}
+.brand{display:flex;align-items:center;gap:14px;max-width:1500px;margin:auto}
+.logo{width:82px;height:58px;flex:0 0 82px}
+.brand-title{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.brand-title h1{margin:0;font-size:25px;letter-spacing:.2px}
+.brand-title .company{font-size:19px;font-weight:800;color:#e7f8ea;letter-spacing:.7px}
+.brand-sub{font-size:12px;color:#cfe9d5;margin-top:2px}
+#nav{position:fixed;left:0;top:84px;bottom:0;width:205px;background:rgba(4,42,22,.94);padding:16px 11px;display:flex;flex-direction:column;gap:6px;z-index:15;overflow:auto}
+#nav button{width:100%;border:0;background:transparent;color:#e6f2e9;text-align:left;padding:12px 13px;border-radius:11px;font-weight:650}
+#nav button:hover{background:#ffffff12}
+#nav button.active{background:#27a052;color:#fff;box-shadow:0 2px 7px #0002}
+main{margin-left:205px;padding:24px;max-width:1600px;margin-right:auto;min-height:calc(100vh - 84px)}
+.card{background:rgba(250,253,250,.94);border:1px solid rgba(220,230,223,.9);border-radius:16px;padding:17px;margin-bottom:15px;box-shadow:0 4px 15px #1b39210b}
+h2{font-size:19px;margin:0 0 13px}h3{font-size:16px;margin:10px 0}
+input,select,textarea{width:100%;padding:12px 13px;border:1px solid #ccd8cf;border-radius:11px;background:#fff;margin:5px 0 10px;color:var(--text)}
+textarea{min-height:105px;resize:vertical}
+input:focus,select:focus{outline:2px solid #9ed1aa;border-color:#4a9a61}
+button{cursor:pointer}
+.primary{background:#15803d;color:#fff;border:0;border-radius:11px;padding:11px 15px;font-weight:750}
+.primary:hover{background:#126b32}
+.danger{background:#fee2e2;color:#991b1b;border:0;border-radius:9px;padding:8px 10px}
+.muted{color:var(--muted);font-size:13px}
+.row{display:flex;gap:8px;align-items:center}.row>*{flex:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{background:#f4f8f5;padding:13px;border-radius:12px;text-align:center;border:1px solid #e3ece5}
+.stat b{display:block;font-size:21px;color:#102718}
+.person{display:flex;gap:8px;align-items:center;margin:6px 0}.person input{margin:0;width:auto}
+.tag{display:inline-block;background:#e8f3ea;padding:5px 8px;border-radius:8px;font-size:13px;margin:3px}
+.small{font-size:13px}.workline{border-top:1px solid #e5e9e6;padding:11px 0}.workline:first-child{border-top:0}
+.empty{text-align:center;padding:35px;color:#718078}
+.dashboard-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:15px}
+.dashboard-stat{background:rgba(250,253,250,.94);border:1px solid rgba(220,230,223,.9);border-radius:16px;padding:18px;box-shadow:0 4px 15px #1b39210b}
+.dashboard-stat .icon{font-size:26px;margin-bottom:5px}.dashboard-stat b{font-size:26px;display:block}.dashboard-stat span{color:var(--muted);font-size:13px}
+.quick-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:15px}
+.section-title{display:flex;align-items:center;gap:9px}.section-title .ico{font-size:22px}
+.action-btn{width:100%;text-align:left;border:1px solid #dce7df;background:#f7faf7;padding:12px;border-radius:11px;margin:6px 0}
+.action-btn:hover{background:#edf6ef}
+.hero-photo{position:relative;overflow:hidden;border-radius:18px;margin-bottom:15px;min-height:245px;background:#183d28;box-shadow:0 5px 20px #1b39211a}.hero-photo img{width:100%;height:310px;display:block;object-fit:cover}.hero-photo:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#052d19cc 0%,#052d1940 45%,#00000005 80%)}.hero-caption{position:absolute;left:24px;bottom:22px;z-index:1;color:#fff}.hero-caption h2{font-size:28px;margin:0 0 5px;text-shadow:0 2px 8px #0008}.hero-caption p{margin:0;font-weight:650;color:#e9f8ed;text-shadow:0 2px 6px #0008}
+.header-actions{margin-left:auto}
+@media(max-width:900px){
+  header{padding:11px 13px}.brand{gap:9px}.logo{width:64px;height:48px;flex-basis:64px}.brand-title h1{font-size:20px}.brand-title .company{font-size:15px}
+  #nav{position:sticky;top:72px;left:auto;width:100%;height:auto;bottom:auto;flex-direction:row;overflow:auto;padding:8px;z-index:14}
+  #nav button{width:auto;white-space:nowrap;text-align:center}
+  main{margin-left:0;padding:13px}
+  .dashboard-stats{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .stats{grid-template-columns:1fr}.dashboard-stats{grid-template-columns:1fr 1fr}.dashboard-stat{padding:13px}
+}
+
+#cloud-sync{margin:12px auto 0;max-width:1500px;padding:12px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;color:#14532d}
+#cloud-sync .sync-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;align-items:center}
+#cloud-sync input{margin:2px 0 6px;padding:9px;font-size:14px}
+#cloud-sync button{border:0;border-radius:9px;padding:9px 12px;font-weight:700;background:#166534;color:#fff;margin:3px 4px 3px 0}
+#cloud-sync button.secondary{background:#e2e8f0;color:#1e293b}
+#cloud-sync .sync-status{font-size:13px;margin-top:6px;color:#334155}
+@media(max-width:900px){#cloud-sync{margin:8px;padding:10px}#cloud-sync .sync-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){#cloud-sync .sync-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg class="logo" viewBox="0 0 180 120" aria-label="M.KOLUÇOLAK TARIM logosu">
+      <g fill="none" stroke="#f3c94b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 91h144"/>
+        <path d="M25 84l14-27 15 27M141 84l15-27 14 27"/>
+        <path d="M48 72h82l10 12H39z"/>
+        <path d="M63 72V49h31v23M94 53h18v19"/>
+        <circle cx="58" cy="87" r="8" fill="#f3c94b"/><circle cx="126" cy="87" r="8" fill="#f3c94b"/>
+        <path d="M12 35c9 3 15 10 17 20M168 35c-9 3-15 10-17 20"/>
+      </g>
+      <text x="90" y="108" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">M.KOLUÇOLAK</text>
+    </svg>
+    <div>
+      <div class="brand-title"><h1>🌾 Tarla Takip</h1><span class="company">M.KOLUÇOLAK TARIM</span></div>
+      <div class="brand-sub">Makine • Ortak • Tarla • Hakediş • Mazot • Hesap</div>
+    </div>
+  </div>
+</header>
+<section id="cloud-sync" aria-label="Cihazlar arası senkronizasyon">
+  <b>☁️ Cihazlar arası senkronizasyon</b>
+  <div class="sync-status" id="sync-status">Kurulum bekleniyor. Önce Supabase bağlantı bilgilerini gir.</div>
+  <div id="sync-config" class="sync-grid" style="margin-top:8px">
+    <label>Project URL<input id="sync-url" type="url" placeholder="https://....supabase.co" autocomplete="url"></label>
+    <label>Publishable key<input id="sync-key" type="password" placeholder="sb_publishable_..." autocomplete="off"></label>
+    <div><button type="button" onclick="saveSyncConfig()">Bağlantıyı kaydet</button></div>
+  </div>
+  <div id="sync-auth" class="sync-grid" style="margin-top:5px;display:none">
+    <label>E-posta<input id="sync-email" type="email" placeholder="E-posta adresin" autocomplete="username"></label>
+    <label>Şifre<input id="sync-password" type="password" placeholder="En az 6 karakter" autocomplete="current-password"></label>
+    <div><button type="button" onclick="signInSync()">Giriş yap</button><button type="button" onclick="signUpSync()" class="secondary">Hesap oluştur</button></div>
+    <div><button type="button" onclick="signOutSync()" class="secondary">Çıkış yap</button><button type="button" onclick="syncNow()">Şimdi eşitle</button></div>
+  </div>
+</section>
+<nav id="nav"></nav><main id="app"></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const KEY="tarlaTakipKOLUCOLAK_V18_BOS";
+let db=JSON.parse(localStorage.getItem(KEY)||'{"customers":[],"fields":[],"machines":[],"works":[],"transactions":[]}');
+db.transactions=db.transactions||[];
+db.notes=db.notes||[];
+db.partners=db.partners||[]; db.partnerEntries=db.partnerEntries||[];
+db.machines=(db.machines||[]).map(m=>({...m,role:m.role||"person"}));
+let page="home", selectedFieldId=null;
+const $=id=>document.getElementById(id), uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const fmt=n=>Number(n||0).toLocaleString("tr-TR",{maximumFractionDigits:2});
+let syncClient=null, syncUser=null, syncChannel=null, syncApplying=false, syncTimer=null, syncReady=false;
+const save=()=>{localStorage.setItem(KEY,JSON.stringify(db)); if(syncReady && syncUser && !syncApplying) scheduleCloudSave();};
+const rate=()=>Number(localStorage.getItem("tarlaTakipRate")||1400);
+const money=n=>Number(n||0).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL";
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+function customerName(id){return db.customers.find(x=>x.id==id)?.name||"Silinmiş müşteri"}
+function fieldName(id){return db.fields.find(x=>x.id==id)?.name||"Silinmiş tarla"}
+function fieldDone(id){return db.works.filter(w=>w.fieldId==id).reduce((s,w)=>s+Number(w.area),0)}
+function machineTotal(id){return db.works.reduce((s,w)=>s+w.parts.filter(p=>p.machineId==id).reduce((a,p)=>a+Number(p.area),0),0)}
+function customerMachineTotals(cid){
+  const fieldIds=new Set(db.fields.filter(f=>f.customerId==cid).map(f=>f.id));
+  const totals={};
+  db.works.filter(w=>fieldIds.has(w.fieldId)).forEach(w=>{
+    (w.parts||[]).forEach(p=>{
+      if(!totals[p.machineId]) totals[p.machineId]={name:p.machineName||db.machines.find(m=>m.id==p.machineId)?.name||"",area:0};
+      totals[p.machineId].area+=Number(p.area||0);
+    });
+  });
+  return Object.values(totals).sort((a,b)=>b.area-a.area);
+}
+function customerEarned(cid){
+  return db.fields.filter(f=>f.customerId==cid).reduce((s,f)=>s+fieldDone(f.id)*customerRate(cid),0);
+}
+function transactionValue(t){
+  if(t.type==="Mazot") return Number(t.liters||0)*Number(t.pricePerLiter||0);
+  return Number(t.amount||0);
+}
+function customerTaken(cid){
+  return db.transactions.filter(t=>t.customerId==cid).reduce((s,t)=>s+transactionValue(t),0);
+}
+function customerBalance(cid){
+  return customerEarned(cid)-customerTaken(cid);
+}
+function machineTaken(id){
+  return db.transactions.filter(t=>t.machineId==id).reduce((s,t)=>s+transactionValue(t),0);
+}
+function cleanTransactions(){
+  const cs=new Set(db.customers.map(c=>c.id)), ms=new Set(db.machines.map(m=>m.id));
+  db.transactions=(db.transactions||[]).filter(t=>cs.has(t.customerId)&&ms.has(t.machineId));
+}
+function nav(){let a=[["home","🏠 Ana Sayfa"],["customers","👥 Müşteriler"],["machines","🚜 Makineler"],["work","➕ Çalışma Ekle"],["transactions","⛽ Mazot / Para"],["reports","📊 Raporlar"],["partners","🤝 Ortak Hesabı"],["notes","📝 Not"]];$("nav").innerHTML=a.map(x=>`<button class="${page==x[0]?'active':''}" onclick="page='${x[0]}';render()">${x[1]}</button>`).join("")}
+function render(){nav();({home,customers,machines,work,transactions,reports,partners,notes}[page])()}
+function home(){
+  let done=db.fields.reduce((s,f)=>s+fieldDone(f.id),0);
+  let earned=db.fields.reduce((s,f)=>s+fieldDone(f.id)*customerRate(f.customerId),0);
+  let taken=db.transactions.reduce((s,t)=>s+transactionValue(t),0);
+  let people=db.machines.length;
+  let recentWorks=db.works.slice().reverse().slice(0,6);
+  let recentTx=db.transactions.slice().reverse().slice(0,6);
+  $("app").innerHTML=`
+  <div class="dashboard-stats">
+    <div class="dashboard-stat"><div class="icon">🌾</div><b>${db.fields.length}</b><span>Toplam Tarla</span></div>
+    <div class="dashboard-stat"><div class="icon">🚜</div><b>${people}</b><span>Toplam Makine / Kişi</span></div>
+    <div class="dashboard-stat"><div class="icon">👥</div><b>${db.customers.length}</b><span>Toplam Müşteri</span></div>
+    <div class="dashboard-stat"><div class="icon">📊</div><b>${fmt(done)}</b><span>Toplam Çalışma Dönümü</span></div>
+  </div>
+  <div class="quick-grid">
+    <div class="card">
+      <h2 class="section-title"><span class="ico">➕</span> Çalışma Ekle</h2>
+      ${db.fields.length ? `<select id="quickField">${db.fields.map(f=>`<option value="${f.id}">${esc(customerName(f.customerId))} — ${esc(f.name)}</option>`).join("")}</select>
+      <div class="muted">Çalışma ekleme ekranından kalan dönümü otomatik bölebilir veya istediğin çekilen dönümü girebilirsin.</div>
+      <button class="primary" style="width:100%;margin-top:8px" onclick="page='work';selectedFieldId=$('quickField').value;render()">Çalışma Ekle</button>` :
+      `<div class="empty">Önce müşteri ve tarla ekle.</div>`}
+    </div>
+    <div class="card">
+      <h2 class="section-title"><span class="ico">⛽</span> Mazot / Para</h2>
+      <div class="muted">Hangi müşteri, hangi makine/kişi, ne kadar mazot veya para alındığını kaydet.</div>
+      <button class="primary" style="width:100%;margin-top:16px" onclick="page='transactions';render()">Mazot / Para Ekle</button>
+    </div>
+  </div>
+  <div class="quick-grid">
+    <div class="card">
+      <h2 class="section-title"><span class="ico">📋</span> Son Çalışmalar</h2>
+      ${recentWorks.map(w=>{
+        let f=db.fields.find(x=>x.id==w.fieldId);
+        return `<div class="workline"><b>${w.date}</b> • ${esc(customerName(f?.customerId))} • ${esc(f?.name||"")}<br>${esc(w.type)} • ${fmt(w.area)} dönüm • ${w.parts.map(p=>esc(p.machineName)).join(", ")}</div>`;
+      }).join("") || '<div class="empty">Henüz çalışma kaydı yok.</div>'}
+    </div>
+    <div class="card">
+      <h2 class="section-title"><span class="ico">💳</span> Son Mazot / Para İşlemleri</h2>
+      ${recentTx.map(t=>{
+        let c=db.customers.find(x=>x.id==t.customerId),m=db.machines.find(x=>x.id==t.machineId);
+        let d=t.type==="Mazot"?`${fmt(t.liters)} litre • ${money(transactionValue(t))}`:money(t.amount);
+        return `<div class="workline"><b>${t.date}</b> • ${esc(c?.name||"")}<br>${esc(m?.name||"")} • ${esc(t.type)} • ${d}</div>`;
+      }).join("") || '<div class="empty">Henüz mazot / para kaydı yok.</div>'}
+    </div>
+  </div>
+  <div class="card">
+    <h2>Genel Hesap</h2>
+    <div class="stats">
+      <div class="stat"><b>${money(earned)}</b>Toplam Hakediş</div>
+      <div class="stat"><b>${money(taken)}</b>Alınan</div>
+      <div class="stat"><b>${money(earned-taken)}</b>Net Kalan</div>
+    </div>
+  </div>
+  <div class="card"><h2>🚜 Makine ve Ortak Özeti</h2><div class="stats"><div class="stat"><b>${db.machines.filter(m=>(m.role||"person")==="own").length}</b>Benim makinelerim</div><div class="stat"><b>${db.machines.filter(m=>(m.role||"person")==="partner").length}</b>Ortak makineleri</div><div class="stat"><b>${db.machines.filter(m=>(m.role||"person")==="person").length}</b>Makinacı / kişiler</div></div><button class="primary" style="width:100%" onclick="page='machines';render()">Makine ve ortakları yönet</button></div>
+  <div class="card"><h2>Hızlı Tarla Bakışı</h2>${db.fields.map(f=>`<button class="action-btn" onclick="showField('${f.id}')"><b>${esc(customerName(f.customerId))} — ${esc(f.name)}</b><br><span class="small">${fmt(fieldDone(f.id))} / ${fmt(f.totalArea)} dönüm • ${money(fieldDone(f.id)*customerRate(f.customerId))}</span></button>`).join("")||'<div class="empty">Henüz tarla yok.</div>'}</div>
+  <div class="card"><h2>Yedekleme</h2><button class="primary" onclick="backup()">Verileri dışa aktar</button> <button class="primary" onclick="document.getElementById('file').click()">İçe aktar</button><input id="file" type="file" accept=".json" style="display:none" onchange="restore(this.files[0])"></div>`;
+}
+function setRate(){let n=Number($("rateInput").value);if(n<=0)return alert("Geçerli bir ücret gir.");localStorage.setItem("tarlaTakipRate",n);render()}
+function showField(id){
+let f=db.fields.find(x=>x.id==id); if(!f)return;
+let works=db.works.filter(w=>w.fieldId==id), people={};
+works.forEach(w=>w.parts.forEach(p=>people[p.machineName]=(people[p.machineName]||0)+Number(p.area)));
+$("app").innerHTML=`<div class="card"><button onclick="render()" style="border:0;background:#eef2ef;padding:8px 10px;border-radius:9px">← Geri</button><h2 style="margin-top:12px">${esc(customerName(f.customerId))} — ${esc(f.name)}</h2>
+<div class="stats"><div class="stat"><b>${fmt(f.totalArea)}</b>Toplam</div><div class="stat"><b>${fmt(fieldDone(id))}</b>Yapılan</div><div class="stat"><b>${fmt(f.totalArea-fieldDone(id))}</b>Kalan</div></div>
+<div style="margin-top:10px"><b>Toplam hakediş: ${money(fieldDone(id)*customerRate(f.customerId))}</b></div></div>
+<div class="card"><h2>Kimler çalıştı?</h2>${Object.entries(people).map(([n,a])=>`<button style="display:block;width:100%;text-align:left;border:0;background:#f5f8f5;padding:11px;border-radius:9px;margin:6px 0" onclick="showMachineByName('${encodeURIComponent(n)}')"><b>${esc(n)}</b> — ${fmt(a)} dönüm — ${money(a*customerRate(f.customerId))}</button>`).join("")||'<div class="empty">Çalışma yok.</div>'}</div>
+<div class="card"><h2>Çalışma parçaları</h2><div class="muted">Yanlış dönüm girildiyse ilgili kişinin yanındaki “Dönümü Düzenle”ye bas.</div>${works.map(w=>`<div class="workline"><b>${w.date} • ${esc(w.type)} • ${fmt(w.area)} dönüm toplam</b><br>${w.parts.map(p=>`<div class="row" style="gap:8px;align-items:center;margin-top:7px"><div style="flex:1">${esc(p.machineName)}: <b>${fmt(p.area)} dönüm</b> (${money(p.area*customerRate(f.customerId))})</div><button class="mini" onclick="editPart('${w.id}','${p.machineId}','field','${f.id}')">Dönümü Düzenle</button></div>`).join("")}${w.note?'<br><span class="muted">'+esc(w.note)+'</span>':''}</div>`).join("")||'<div class="empty">Yok.</div>'}</div>`;
+}
+function showMachineByName(encoded){showMachineName(decodeURIComponent(encoded))}
+function showMachineName(name){
+let total=0, rows=[];
+db.works.forEach(w=>w.parts.forEach(p=>{if(p.machineName==name){let f=db.fields.find(f=>f.id==w.fieldId);total+=Number(p.area);rows.push({w,f,p})}}));
+$("app").innerHTML=`<div class="card"><button onclick="render()" style="border:0;background:#eef2ef;padding:8px 10px;border-radius:9px">← Geri</button><h2 style="margin-top:12px">${esc(name)}</h2><div class="stats"><div class="stat"><b>${fmt(total)}</b>Dönüm</div><div class="stat"><b>${money(rows.reduce((sum,x)=>sum+Number(x.p.area)*workRate(x.w),0))}</b>Hakediş</div><div class="stat"><b>${money(machineTaken(db.machines.find(m=>m.name==name)?.id))}</b>Alınan</div></div></div>
+<div class="card"><h2>Nerelerde çalıştı?</h2>${rows.map(x=>`<button style="display:block;width:100%;text-align:left;border:0;background:#f5f8f5;padding:11px;border-radius:9px;margin:6px 0" onclick="showField('${x.f.id}')"><b>${esc(customerName(x.f.customerId))} — ${esc(x.f.name)}</b><br>${x.w.date} • ${esc(x.w.type)} • <b>${fmt(x.p.area)} dönüm</b> • ${money(x.p.area*customerRate(x.f.customerId))}</button>`).join("")||'<div class="empty">Çalışma yok.</div>'}</div>`;
+}
+function showMachine(id){let m=db.machines.find(x=>x.id==id);if(m)showMachineName(m.name)}
+function customers(){
+$("app").innerHTML=`<div class="card"><h2>Müşteri Ekle</h2><input id="cn" placeholder="Örn. Ercan Bardakcı"><input id="cr" type="number" min="0" step="1" value="1400" placeholder="1 dönüm fiyatı TL"><button class="primary" onclick="addCustomer()">Ekle</button></div>
+<div class="card"><h2>Müşteriler</h2>${db.customers.map(c=>`<div class="workline"><div class="row"><div><b>${esc(c.name)}</b><div class="muted">${db.fields.filter(f=>f.customerId==c.id).length} tarla • 1 dönüm: ${money(customerRate(c.id))}</div></div><button class="danger" onclick="delCustomer('${c.id}')">Sil</button></div><button class="mini" onclick="setCustomerRate('${c.id}')">Fiyatı değiştir</button>
+<div>${db.fields.filter(f=>f.customerId==c.id).map(f=>`<span class="tag">${esc(f.name)} • ${fmt(f.totalArea)} dönüm <button class="danger mini" onclick="delField('${f.id}')">Sil</button></span>`).join("")}</div></div>`).join("")||'<div class="empty">Müşteri ekle.</div>'}</div>
+<div class="card"><h2>Tarla Ekle</h2><select id="fc">${db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("")}</select><input id="fn" placeholder="Tarla adı / mevki"><input id="fa" type="number" step="0.01" placeholder="Toplam dönüm"><button class="primary" onclick="addField()">Tarla Ekle</button></div>`;
+}
+function addCustomer(){let n=$("cn").value.trim(),r=Number($("cr").value||1400);if(!n)return alert("Müşteri adı gir.");if(!Number.isFinite(r)||r<0)return alert("Geçerli fiyat gir.");db.customers.push({id:uid(),name:n,rate:r});save();render()}
+function customerRate(cid){let c=db.customers.find(x=>x.id==cid);return Number(c?.rate??1400)}
+function workRate(w){let f=db.fields.find(x=>x.id==w.fieldId);return customerRate(f?.customerId)}
+function setCustomerRate(id){let c=db.customers.find(x=>x.id==id);if(!c)return;let v=prompt(c.name+" için 1 dönüm fiyatı (TL):",c.rate??1400);if(v===null)return;let n=Number(v);if(!Number.isFinite(n)||n<0)return alert("Geçerli fiyat gir.");c.rate=n;save();render()}
+function delField(id){let f=db.fields.find(x=>x.id==id);if(!f)return;if(!confirm(f.name+" ve bu tarlanın tüm çalışmaları silinecek. Geri alınamaz. Devam?"))return;db.works=db.works.filter(w=>w.fieldId!=id);db.fields=db.fields.filter(x=>x.id!=id);save();render()}
+function cleanData(){let fs=new Set(db.fields.map(f=>f.id)),ms=new Set(db.machines.map(m=>m.id));db.works=(db.works||[]).filter(w=>fs.has(w.fieldId)).map(w=>{w.parts=(w.parts||[]).filter(p=>ms.has(p.machineId));w.area=w.parts.reduce((a,p)=>a+Number(p.area||0),0);return w}).filter(w=>w.parts.length&&w.area>0);db.customers=(db.customers||[]).map(c=>({...c,rate:Number(c.rate??1400)}));db.transactions=(db.transactions||[]).filter(t=>ms.has(t.machineId)&&new Set(db.customers.map(c=>c.id)).has(t.customerId))}
+
+function addField(){let c=$("fc").value,n=$("fn").value.trim(),a=Number($("fa").value);if(!c||!n||a<=0)return alert("Bilgileri doldur.");db.fields.push({id:uid(),customerId:c,name:n,totalArea:a});save();render()}
+function delCustomer(id){let c=db.customers.find(x=>x.id==id);if(!c)return;if(!confirm(c.name+" ve bu müşteriye ait tüm tarlalar ve çalışmalar silinecek. Geri alınamaz. Devam?"))return;let ids=new Set(db.fields.filter(f=>f.customerId==id).map(f=>f.id));db.fields=db.fields.filter(f=>f.customerId!=id);db.works=db.works.filter(w=>!ids.has(w.fieldId));db.transactions=db.transactions.filter(t=>t.customerId!=id);db.customers=db.customers.filter(x=>x.id!=id);save();render()}
+function machines(){
+  const own=db.machines.filter(m=>(m.role||"person")==="own");
+  const partner=db.machines.filter(m=>(m.role||"person")==="partner");
+  const person=db.machines.filter(m=>(m.role||"person")==="person");
+  const group=(title,items,empty)=>`<div class="card"><h2>${title}</h2>${items.map(m=>`<div class="workline"><div class="row"><div><b>${esc(m.name)}</b><div class="muted">Toplam çalışma: ${fmt(machineTotal(m.id))} dönüm • Hakediş: ${money(machineMoney(m.id))}</div></div><button class="mini" onclick="editMachine('${m.id}')">Düzenle</button><button class="danger" onclick="delMachine('${m.id}')">Sil</button></div></div>`).join("")||`<div class="empty">${empty}</div>`}</div>`;
+  $("app").innerHTML=`<div class="card"><h2>🚜 Makine ve Ekip Tanımla</h2><div class="muted">Kendi makinelerini, ortaklarının makinelerini ve makinacı/çalışan kişileri ayrı kaydet. Çalışma eklerken yine katılanları seçebilirsin.</div><label><b>Makine / kişi adı</b></label><input id="mn" placeholder="Örn. Mücahit'in Tümosan'ı, Emrah, Arda"><label><b>Bu kayıt hangisi?</b></label><select id="mr"><option value="own">Benim makinem</option><option value="partner">Ortağımın makinesi</option><option value="person">Makinacı / çalışan kişi</option></select><button class="primary" onclick="addMachine()">＋ Ekle</button></div>
+  <div class="stats"><div class="stat"><b>${own.length}</b>Benim makinelerim</div><div class="stat"><b>${partner.length}</b>Ortak makineleri</div><div class="stat"><b>${person.length}</b>Makinacı / kişiler</div></div>
+  ${group('🟢 Benim Makinelerim',own,'Henüz kendi makinen eklenmedi.')}${group('🤝 Ortaklarımın Makineleri',partner,'Henüz ortak makinesi eklenmedi.')}${group('👷 Makinacılar / Çalışanlar',person,'Henüz kişi eklenmedi.')}`;
+}
+function addMachine(){let n=$("mn").value.trim(),role=$("mr").value;if(!n)return alert("İsim gir.");db.machines.push({id:uid(),name:n,role});save();render()}
+function editMachine(id){let m=db.machines.find(x=>x.id===id);if(!m)return;let n=prompt('Makine / kişi adı:',m.name);if(n===null)return;if(!n.trim())return alert('Ad boş olamaz.');let role=prompt('Tür: own = benim makinem, partner = ortağımın makinesi, person = makinacı/kişi',m.role||'person');if(role===null)return;if(!['own','partner','person'].includes(role))return alert('Türü own, partner veya person olarak gir.');m.name=n.trim();m.role=role;db.works.forEach(w=>(w.parts||[]).forEach(p=>{if(p.machineId===id)p.machineName=m.name}));save();render()}
+function delMachine(id){let m=db.machines.find(x=>x.id==id);if(!m)return;if(!confirm(m.name+" silinecek ve eski çalışmalardaki payı kaldırılacak. Geri alınamaz. Devam?"))return;db.works=db.works.map(w=>{w.parts=w.parts.filter(p=>p.machineId!=id);w.area=w.parts.reduce((a,p)=>a+Number(p.area),0);return w}).filter(w=>w.parts.length&&w.area>0);db.machines=db.machines.filter(x=>x.id!=id);db.transactions=db.transactions.filter(t=>t.machineId!=id);save();render()}
+function machineMoney(id){return db.works.reduce((sum,w)=>{let p=w.parts.find(x=>x.machineId==id);return sum+(p?Number(p.area)*workRate(w):0)},0)}
+function work(){
+if(!db.fields.length){$("app").innerHTML='<div class="card empty">Önce müşteri ve tarla ekle.</div>';return}
+let f=db.fields.find(x=>x.id==(selectedFieldId||""))||db.fields[0];selectedFieldId=f.id;
+let done=fieldDone(f.id),rem=Number(f.totalArea)-done;
+$("app").innerHTML=`<div class="card"><h2>Yeni Çalışma</h2><select id="field" onchange="selectedFieldId=this.value;work()">${db.fields.map(x=>`<option value="${x.id}" ${x.id==f.id?'selected':''}>${esc(customerName(x.customerId))} — ${esc(x.name)}</option>`).join("")}</select>
+<div class="stats"><div class="stat"><b>${fmt(f.totalArea)}</b>Toplam</div><div class="stat"><b>${fmt(done)}</b>Yapılan</div><div class="stat"><b>${fmt(rem)}</b>Kalan</div></div>
+<br><input id="wa" type="number" step="0.01" placeholder="Bu çalışmada yapılan dönüm (Normalde boş bırakılabilir)"><select id="wt" onchange="if(this.value==='Normal'){document.getElementById('wa').disabled=false}else{document.getElementById('wa').disabled=false;document.getElementById('wa').value=''}"><option>Normal</option><option>Yastık</option><option>Diğer</option></select><div class="muted">Normal seçilirse dönüm kutusunu boş bırakırsan kalan ${fmt(rem)} dönüm bölünür; sayı girersen sadece o dönüm eşit bölünür.</div><input id="wn" placeholder="Not (isteğe bağlı)">
+<h3>Makine / Kişiler</h3><div id="people">${db.machines.map(m=>`<label class="person"><input type="checkbox" value="${m.id}"> ${esc(m.name)}</label>`).join("")||'<div class="muted">Önce makine/kişi ekle.</div>'}</div>
+<button class="primary" onclick="saveEqualWork()">Eşit Böl ve Kaydet</button></div>
+<div class="card"><h2>Bu tarlanın çalışma geçmişi</h2>${db.works.filter(w=>w.fieldId==f.id).map(w=>`<div class="workline"><b>${w.date} — ${esc(w.type)} — ${fmt(w.area)} dönüm toplam</b>${w.parts.map(p=>`<div class="row" style="gap:8px;align-items:center;margin-top:7px"><div style="flex:1">${esc(p.machineName)}: <b>${fmt(p.area)} dönüm</b></div><button class="mini" onclick="editPart('${w.id}','${p.machineId}','work','${f.id}')">Dönümü Düzenle</button></div>`).join("")}${w.note?'<br><span class="muted">'+esc(w.note)+'</span>':''}<br><button class="danger" onclick="delWork('${w.id}')">Kaydı Sil</button></div>`).join("")||'<div class="empty">Henüz çalışma yok.</div>'}</div>`;
+}
+function saveEqualWork(){
+let f=db.fields.find(x=>x.id==selectedFieldId),rem=Number(f.totalArea)-fieldDone(f.id),type=$("wt").value;
+let entered=Number($("wa").value||0); let area=type==="Normal"?(entered>0?entered:rem):entered;
+let ids=[...document.querySelectorAll("#people input:checked")].map(x=>x.value);
+if(rem<=0)return alert("Bu tarlada kalan dönüm yok.");
+if(area<=0||area>rem+1e-9)return alert("Bu alan tarlanın kalan dönümünü aşamaz.");
+if(!ids.length)return alert("En az bir makine/kişi seç.");
+let each=area/ids.length;
+db.works.push({id:uid(),date:new Date().toLocaleDateString("tr-TR"),fieldId:f.id,area,type,note:$("wn").value.trim(),parts:ids.map(id=>({machineId:id,machineName:db.machines.find(m=>m.id==id)?.name||"Silinmiş",area:each}))});
+save();work();
+}
+
+function editPart(workId,machineId,source,fieldId){
+  const w=db.works.find(x=>x.id===workId); if(!w)return;
+  const p=w.parts.find(x=>x.machineId===machineId); if(!p)return;
+  const oldArea=Number(p.area)||0;
+  const raw=prompt(`${p.machineName} için doğru dönüm miktarını gir:`,String(oldArea));
+  if(raw===null)return;
+  const next=Number(raw);
+  if(!Number.isFinite(next)||next<0)return alert("0 veya daha büyük geçerli bir dönüm gir.");
+  const f=db.fields.find(x=>x.id===w.fieldId); if(!f)return;
+  const oldWorkArea=Number(w.area)||0;
+  const newWorkArea=Math.max(0,oldWorkArea-oldArea+next);
+  const fieldDoneAfter=fieldDone(f.id)-oldWorkArea+newWorkArea;
+  if(fieldDoneAfter>Number(f.totalArea)+1e-8)return alert(`Bu değişiklik tarlanın toplam alanını aşırıyor. Tarlanın toplamı ${fmt(f.totalArea)} dönüm.`);
+  p.area=next;
+  w.area=w.parts.reduce((sum,part)=>sum+Number(part.area||0),0);
+  if(w.area<=0){
+    if(!confirm("Bu kaydın toplamı 0 dönüm oldu. Çalışma kaydı tamamen silinsin mi?")){p.area=oldArea;w.area=oldWorkArea;return;}
+    db.works=db.works.filter(x=>x.id!==workId);
+  }
+  save();
+  if(source==="field")showField(fieldId);else{selectedFieldId=fieldId;work();}
+}
+
+function delWork(id){if(!confirm("Bu çalışma silinsin mi?"))return;db.works=db.works.filter(w=>w.id!=id);save();work()}
+function transactions(){
+  const totalTaken=db.transactions.reduce((s,t)=>s+transactionValue(t),0);
+  $("app").innerHTML=`<div class="card"><h2>💰 Mazot / Para Alımı</h2>
+  <div class="muted">Müşteriden alınan mazot veya parayı kaydet. Böylece kimin, hangi müşteriden, ne aldığını ve toplam hakedişten ne kadar kaldığını takip edebilirsin.</div>
+  <select id="tc">${db.customers.map(c=>`<option value="${c.id}">${esc(c.name)}</option>`).join("")}</select>
+  <select id="tm">${db.machines.map(m=>`<option value="${m.id}">${esc(m.name)}</option>`).join("")}</select>
+  <select id="tt" onchange="transactionForm()"><option value="Mazot">Mazot</option><option value="Para">Para</option></select>
+  <div id="transactionForm"></div>
+  <input id="tn" placeholder="Not / ne aldı? (isteğe bağlı)">
+  <button class="primary" onclick="addTransaction()">Kaydet</button>
+  </div>
+  <div class="card"><h2>Müşteri Hesapları</h2>${db.customers.map(c=>{
+    const earned=customerEarned(c.id),taken=customerTaken(c.id),bal=customerBalance(c.id);
+    return `<div class="workline"><b>${esc(c.name)}</b><br>Hakediş: <b>${money(earned)}</b> • Alınan: <b>${money(taken)}</b> • Kalan: <b>${money(bal)}</b>
+    <div class="muted">${db.transactions.filter(t=>t.customerId==c.id).length} alım kaydı</div></div>`;
+  }).join("")||'<div class="empty">Önce müşteri ekle.</div>'}</div>
+  <div class="card"><h2>Alım Geçmişi</h2>${db.transactions.slice().reverse().map(t=>{
+    const m=db.machines.find(x=>x.id==t.machineId), c=db.customers.find(x=>x.id==t.customerId);
+    const detail=t.type==="Mazot"
+      ? `${fmt(t.liters)} litre × ${money(t.pricePerLiter)} = <b>${money(transactionValue(t))}</b>`
+      : `<b>${money(t.amount)}</b>`;
+    return `<div class="workline"><b>${t.date} • ${esc(t.type)}</b><br>${esc(c?.name||"")} → ${esc(m?.name||"")}<br>${detail}${t.note?`<br><span class="muted">${esc(t.note)}</span>`:""}<br><button class="danger" onclick="delTransaction('${t.id}')">Kaydı Sil</button></div>`;
+  }).join("")||'<div class="empty">Henüz mazot/para kaydı yok.</div>'}</div>`;
+  transactionForm();
+}
+function transactionForm(){
+  const type=$("tt")?.value;
+  if(!$("transactionForm"))return;
+  $("transactionForm").innerHTML=type==="Mazot"
+    ? `<input id="tliters" type="number" min="0" step="0.01" placeholder="Mazot kaç litre?"><input id="tprice" type="number" min="0" step="0.01" placeholder="Litre fiyatı (TL)">`
+    : `<input id="tamount" type="number" min="0" step="0.01" placeholder="Alınan para (TL)">`;
+}
+function addTransaction(){
+  if(!db.customers.length)return alert("Önce müşteri ekle.");
+  if(!db.machines.length)return alert("Önce makine/kişi ekle.");
+  const customerId=$("tc").value,machineId=$("tm").value,type=$("tt").value;
+  let t={id:uid(),date:new Date().toLocaleDateString("tr-TR"),customerId,machineId,type,note:$("tn").value.trim()};
+  if(type==="Mazot"){
+    const liters=Number($("tliters").value),price=Number($("tprice").value);
+    if(liters<=0||price<=0)return alert("Litre ve litre fiyatını gir.");
+    t.liters=liters;t.pricePerLiter=price;
+  }else{
+    const amount=Number($("tamount").value);
+    if(amount<=0)return alert("Alınan para miktarını gir.");
+    t.amount=amount;
+  }
+  db.transactions.push(t);save();transactions();
+}
+function delTransaction(id){
+  if(!confirm("Bu alım kaydı silinsin mi?"))return;
+  db.transactions=db.transactions.filter(t=>t.id!=id);save();transactions();
+}
+function reports(){
+const doneAll=db.fields.reduce((s,f)=>s+fieldDone(f.id),0);
+const earnedAll=db.customers.reduce((s,c)=>s+customerEarned(c.id),0);
+const takenAll=db.customers.reduce((s,c)=>s+customerTaken(c.id),0);
+const partnerNet=(db.partners||[]).reduce((s,p)=>s+partnerTotals(p.id).net,0);
+const fuelAll=db.transactions.filter(t=>t.type==="Mazot").reduce((s,t)=>s+transactionValue(t),0);
+$("app").innerHTML=`<div class="card"><h2>📊 Sezon Özeti</h2><div class="stats"><div class="stat"><span>Toplam çekilen</span><b>${fmt(doneAll)} dönüm</b></div><div class="stat"><span>Müşteri hakedişi</span><b>${money(earnedAll)}</b></div><div class="stat"><span>Müşteriden alınan</span><b>${money(takenAll)}</b></div><div class="stat"><span>Mazot/para alımları</span><b>${money(fuelAll)}</b></div><div class="stat"><span>Ortak net hesabı</span><b>${money(partnerNet)}</b></div></div><p class="muted">Ortak hesabı müşterilerin hakedişinden ayrı tutulur. Bu özet kayıtlı verilere göre hesaplanır.</p></div><div class="card"><h2>Makine / Kişi Hakedişleri</h2>${db.machines.map(m=>`<button style="display:block;width:100%;text-align:left;border:0;background:#f5f8f5;padding:12px;border-radius:10px;margin:7px 0" onclick="showMachine('${m.id}')"><b>${esc(m.name)}</b><br>${fmt(machineTotal(m.id))} dönüm • <b>${money(machineMoney(m.id))}</b></button>`).join("")||'<div class="empty">Henüz veri yok.</div>'}</div>
+<div class="card"><h2>Müşteri Hakedişleri</h2>${db.customers.map(c=>{let fs=db.fields.filter(f=>f.customerId==c.id),t=fs.reduce((s,f)=>s+fieldDone(f.id),0);return `<button style="display:block;width:100%;text-align:left;border:0;background:#f5f8f5;padding:12px;border-radius:10px;margin:7px 0" onclick="showCustomer('${c.id}')"><b>${esc(c.name)}</b><br>${fmt(t)} dönüm • Hakediş: <b>${money(customerEarned(c.id))}</b> • Kalan: <b>${money(customerBalance(c.id))}</b></button>`}).join("")||'<div class="empty">Henüz müşteri yok.</div>'}</div>
+<div class="card"><h2>Tarlalar</h2>${db.fields.map(f=>`<button style="display:block;width:100%;text-align:left;border:0;background:#f5f8f5;padding:12px;border-radius:10px;margin:7px 0" onclick="showField('${f.id}')"><b>${esc(customerName(f.customerId))} — ${esc(f.name)}</b><br>${fmt(fieldDone(f.id))}/${fmt(f.totalArea)} dönüm • <b>${money(fieldDone(f.id)*customerRate(f.customerId))}</b></button>`).join("")}</div>`;
+}
+function showCustomer(id){
+  let c=db.customers.find(x=>x.id==id),fs=db.fields.filter(f=>f.customerId==id);
+  let t=fs.reduce((s,f)=>s+fieldDone(f.id),0), totals=customerMachineTotals(id);
+  $("app").innerHTML=`
+  <div class="card">
+    <h2>${esc(c?.name||"Müşteri")}</h2>
+    <div class="stats">
+      <div class="stat"><b>${fmt(t)}</b>Toplam Çekilen Dönüm</div>
+      <div class="stat"><b>${money(customerEarned(id))}</b>Toplam Hakediş</div>
+      <div class="stat"><b>${money(customerBalance(id))}</b>Kalan Hakediş</div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>👥 Bu Müşterinin Yerlerinde Kim Ne Kadar Çekti?</h2>
+    <div class="muted">Müşterinin bütün tarlaları tek hesapta birleştirilir. Aynı kişi 3 ayrı tarlada çalıştıysa hepsi toplanır.</div>
+    ${totals.map(x=>`<div class="workline"><b>${esc(x.name)}</b><br><span style="font-size:20px;font-weight:800">${fmt(x.area)} dönüm</span></div>`).join("")||'<div class="empty">Henüz çalışma yok.</div>'}
+  </div>
+  <div class="card">
+    <h2>🌾 Tarlalar</h2>
+    ${fs.map(f=>{
+      const done=fieldDone(f.id), rem=Number(f.totalArea)-done;
+      return `<button class="action-btn" onclick="showField('${f.id}')"><b>${esc(f.name)}</b><br><span class="small">${fmt(done)} / ${fmt(f.totalArea)} dönüm • ${fmt(rem)} kalan • ${money(done*customerRate(id))}</span></button>`;
+    }).join("")||'<div class="empty">Henüz tarla yok.</div>'}
+  </div>
+  <div class="card">
+    <h2>⛽💵 Alınanlar</h2>
+    ${db.transactions.filter(t=>t.customerId==id).slice().reverse().map(t=>{
+      let mm=db.machines.find(x=>x.id==t.machineId);
+      let d=t.type==="Mazot"?`${fmt(t.liters)} litre × ${money(t.pricePerLiter)} = ${money(transactionValue(t))}`:money(t.amount);
+      return `<div class="workline"><b>${t.date} • ${esc(t.type)}</b><br>${esc(mm?.name||"")} — ${d}${t.note?`<br><span class="muted">${esc(t.note)}</span>`:""}</div>`;
+    }).join("")||'<div class="empty">Alım yok.</div>'}
+  </div>
+  <button class="primary" onclick="page='customers';render()">← Müşterilere Dön</button>`;
+}
+
+
+function partnerTotals(id){
+ const es=(db.partnerEntries||[]).filter(e=>e.partnerId===id);
+ const receivable=es.reduce((s,e)=>s+(e.kind==="alacak"?Number(e.amount):e.kind==="tahsilat"?-Number(e.amount):0),0);
+ const payable=es.reduce((s,e)=>s+(e.kind==="borc"?Number(e.amount):e.kind==="odeme"?-Number(e.amount):0),0);
+ return {receivable,payable,net:receivable-payable};
+}
+function partners(){
+ db.partners=db.partners||[];db.partnerEntries=db.partnerEntries||[];
+ const totalReceivable=db.partners.reduce((s,p)=>s+partnerTotals(p.id).receivable,0);
+ const totalPayable=db.partners.reduce((s,p)=>s+partnerTotals(p.id).payable,0);
+ $("app").innerHTML=`<div class="card"><h2>🤝 Ortak Hesabı</h2><p class="muted">Ortaklarınla yaptığın masrafları, mazot alımlarını, borçları ve ödemeleri ayrı takip et. Bu kayıtlar müşteri hakedişlerini değiştirmez.</p>
+ <div class="stats"><div class="stat"><span>Ortaklardan alacağım</span><b>${money(totalReceivable)}</b></div><div class="stat"><span>Ortaklara borcum</span><b>${money(totalPayable)}</b></div><div class="stat"><span>Net fark (alacak − borç)</span><b>${money(totalReceivable-totalPayable)}</b></div></div>
+ <h3>＋ Ortak ekle</h3><div class="row"><input id="partnerName" placeholder="Ortağın adı soyadı"><button class="primary" onclick="addPartner()">Ortak Ekle</button></div></div>
+ <div class="card"><h2>📒 Ortaklar ve hesapları</h2>${db.partners.map(p=>{let t=partnerTotals(p.id);return `<div class="workline"><div class="row" style="align-items:flex-start"><div style="flex:1"><b>${esc(p.name)}</b><br><span class="muted">Alacağım: ${money(t.receivable)} · Borcum: ${money(t.payable)}</span><br><b>Net: ${money(t.net)} ${t.net>0?'(benim alacağım)':t.net<0?'(benim borcum)':'(hesap kapalı)'}</b></div><div style="display:flex;flex-direction:column;gap:5px"><button class="action-btn" onclick="addPartnerEntry('${p.id}')">＋ Hareket Ekle</button><button class="action-btn" onclick="showPartnerEntries('${p.id}')">Geçmiş</button><button class="danger" onclick="deletePartner('${p.id}')">Sil</button></div></div></div>`}).join('')||'<div class="empty">Henüz ortak eklenmedi.</div>'}</div>
+ <div class="card"><h2>🧾 Son ortak hareketleri</h2>${db.partnerEntries.slice().reverse().slice(0,30).map(e=>{let p=db.partners.find(x=>x.id===e.partnerId);return `<div class="workline"><b>${esc(p?.name||'Silinmiş ortak')} · ${esc(e.date)}</b><br>${esc(({mazot_aldim:'Ben onun için mazot aldım (alacağım)',mazot_aldi:'O benim için mazot aldı (borcum)',para_verdi:'O bana para verdi (tahsilat)',para_verdim:'Ben ona para verdim / borç ödedim',diger_alacak:'Ben onun için masraf yaptım (alacağım)',diger_borc:'O benim için masraf yaptı (borcum)',alacak:'Ortak için masraf yaptım (alacağım)',borc:'Ortak benim için masraf yaptı (borcum)',tahsilat:'Ortak bana ödeme yaptı',odeme:'Ortağa borç ödedim'})[e.entryType]||e.kind)} — <b>${e.liters?fmt(e.liters)+' L × '+money(e.price)+' = ':''}${money(e.amount)}</b>${e.note?`<br>${esc(e.note)}`:''}<br><button class="danger" onclick="deletePartnerEntry('${e.id}')">Hareketi sil</button></div>`}).join('')||'<div class="empty">Henüz hesap hareketi yok.</div>'}</div>`;
+}
+function addPartner(){let name=$("partnerName").value.trim();if(!name)return alert('Ortağın adını yaz.');db.partners.push({id:uid(),name});save();partners()}
+function addPartnerEntry(id){
+ let p=db.partners.find(x=>x.id===id);if(!p)return;
+ let kind=prompt('HAREKET TÜRÜ — '+p.name+'\n\n1 = Ben onun için mazot aldım (ALACAĞIM)\n2 = O benim için mazot aldı (BORCUM)\n3 = O bana para verdi (alacağımı tahsil ettim)\n4 = Ben ona para verdim / borç ödedim\n5 = Ben onun için başka masraf yaptım (ALACAĞIM)\n6 = O benim için başka masraf yaptı (BORCUM)','1');
+ if(kind===null)return;
+ const map={'1':'alacak','2':'borc','3':'tahsilat','4':'odeme','5':'alacak','6':'borc'};
+ if(!map[kind])return alert('1 ile 6 arasında seçim yap.');
+ let liters=0,price=0,amount=0;
+ if(kind==='1'||kind==='2'){
+   liters=Number(prompt('Kaç litre mazot?','80'));if(!Number.isFinite(liters)||liters<=0)return alert('Geçerli litre gir.');
+   price=Number(prompt('Litre fiyatı (TL):','58'));if(!Number.isFinite(price)||price<=0)return alert('Geçerli litre fiyatı gir.');
+   amount=Math.round(liters*price*100)/100;
+ } else {
+   amount=Number(prompt('Tutar (TL):','0'));if(!Number.isFinite(amount)||amount<=0)return alert('Geçerli bir tutar gir.');
+ }
+ let note=prompt('Açıklama (isteğe bağlı):',kind==='1'?'Cebimden aldığım mazot':kind==='2'?'Ortağın benim için aldığı mazot':'')||'';
+ let date=prompt('Tarih (YYYY-AA-GG):',new Date().toLocaleDateString('en-CA'))||new Date().toLocaleDateString('en-CA');
+ db.partnerEntries.push({id:uid(),partnerId:id,kind:map[kind],entryType:kind==='1'?'mazot_aldim':kind==='2'?'mazot_aldi':kind==='3'?'para_verdi':kind==='4'?'para_verdim':kind==='5'?'diger_alacak':'diger_borc',liters,price,amount,note,date,createdAt:Date.now()});save();partners();
+}
+function showPartnerEntries(id){
+ let p=db.partners.find(x=>x.id===id);if(!p)return;
+ let es=db.partnerEntries.filter(e=>e.partnerId===id).slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+ const label=e=>({mazot_aldim:'Ben onun için mazot aldım · Alacağım',mazot_aldi:'O benim için mazot aldı · Borcum',para_verdi:'O bana para verdi · Tahsilat',para_verdim:'Ben ona para verdim / borç ödedim',diger_alacak:'Ben onun için masraf yaptım · Alacağım',diger_borc:'O benim için masraf yaptı · Borcum',alacak:'Ortak için masraf yaptım · Alacağım',borc:'Ortak benim için masraf yaptı · Borcum',tahsilat:'Ortak bana ödeme yaptı',odeme:'Ortağa borç ödedim'}[e.entryType]||e.kind);
+ alert(p.name+' — HESAP DEFTERİ\n\n'+(es.map(e=>`${e.date} | ${label(e)} | ${e.liters?fmt(e.liters)+' L × '+money(e.price)+' = ':''}${money(e.amount)}${e.note?' | '+e.note:''}`).join('\n')||'Kayıt yok.'));
+}
+function deletePartnerEntry(id){if(!confirm('Bu hesap hareketi silinsin mi?'))return;db.partnerEntries=db.partnerEntries.filter(e=>e.id!==id);save();partners()}
+function deletePartner(id){let p=db.partners.find(x=>x.id===id);if(!p||!confirm(p.name+' ve tüm ortak hesap hareketleri silinsin mi?'))return;db.partnerEntries=db.partnerEntries.filter(e=>e.partnerId!==id);db.partners=db.partners.filter(x=>x.id!==id);save();partners()}
+
+function notes(){
+  db.notes=db.notes||[]; db.partners=db.partners||[]; db.partnerEntries=db.partnerEntries||[];
+db.machines=(db.machines||[]).map(m=>({...m,role:m.role||"person"}));
+  const ordered=db.notes.slice().reverse();
+  const books=db.partners.map(p=>{const t=partnerTotals(p.id);return `<div class="workline"><div class="row" style="align-items:center"><div style="flex:1"><b>📒 ${esc(p.name)} ile Hesap</b><br><span class="muted">Alacağım: ${money(t.receivable)} · Borcum: ${money(t.payable)}</span><br><b>Net bakiye: ${money(t.net)}</b></div><button class="primary" onclick="openPersonBook('${p.id}')">Defteri Aç</button></div></div>`}).join('');
+  $("app").innerHTML=`<div class="card"><h2>📚 Kişiye Özel Hesap Defterleri</h2><p class="muted">Her ortağın/kişinin kendine ait ayrı bir sayfası olacak. Günlük mazot, litre, tarih, para alışverişi ve karşılıklı masrafları o kişinin defterine gir. Ay sonunda o kişinin toplam hesabını gör.</p><div class="row"><input id="bookPersonName" placeholder="Örn. Emrah Amca, Atakan Amca"><button class="primary" onclick="addPersonBook()">＋ Yeni Hesap Defteri</button></div>${books||'<div class="empty">Henüz kişisel hesap defteri yok. Yukarıdan Emrah Amca gibi bir kişi ekle.</div>'}</div><div class="card"><h2>📝 Not</h2><div class="muted">İstediğin bilgiyi buraya yazıp kaydedebilirsin.</div>
+  <label for="noteTitle"><b>Not başlığı</b></label><input id="noteTitle" placeholder="Örn. Emrah için cebimden mazot aldım">
+  <div class="row"><div><label for="noteDate"><b>Tarih</b></label><input id="noteDate" type="date" value="${new Date().toISOString().slice(0,10)}"></div><div><label for="noteAmount"><b>Tutar (TL, isteğe bağlı)</b></label><input id="noteAmount" type="number" min="0" step="0.01" placeholder="Örn. 4640"></div></div>
+  <label for="noteBody"><b>Açıklama</b></label><textarea id="noteBody" placeholder="Örn. 80 litre mazotu kendi cebimden aldım, Emrah'ın hesabına yazılacak."></textarea><label for="notePhoto"><b>Fiş / masraf fotoğrafı (isteğe bağlı)</b></label><input id="notePhoto" type="file" accept="image/*">
+  <button class="primary" onclick="addNote()">＋ Notu Kaydet</button></div>
+  <div class="card"><h2>📝 Kayıtlı Notlar (${db.notes.length})</h2>${ordered.map(n=>`<div class="workline"><div class="row" style="align-items:flex-start"><div><b>${esc(n.title||'Başlıksız not')}</b><br><span class="muted">${esc(n.date||'')}</span>${Number(n.amount)>0?`<br><b>${money(n.amount)}</b>`:''}<div style="white-space:pre-wrap;margin-top:7px">${esc(n.body||'')}</div>${n.photo?`<br><img src="${n.photo}" alt="Masraf fişi" style="max-width:220px;width:100%;border-radius:10px;margin-top:8px">`:""}</div><div style="flex:0 0 auto;display:flex;gap:5px;flex-direction:column"><button class="action-btn" onclick="editNote('${n.id}')">Düzenle</button><button class="danger" onclick="deleteNote('${n.id}')">Sil</button></div></div></div>`).join('')||'<div class="empty">Henüz not eklenmedi. Yukarıdan ilk notunu ekleyebilirsin.</div>'}</div>`;
+}
+function addPersonBook(){
+  const name=$("bookPersonName").value.trim(); if(!name)return alert('Kişinin adını yaz knk.');
+  db.partners=db.partners||[];
+  if(db.partners.some(p=>p.name.trim().toLowerCase()===name.toLowerCase()))return alert('Bu kişinin hesap defteri zaten var.');
+  db.partners.push({id:uid(),name});save();notes();
+}
+function openPersonBook(id,month='all'){
+  const p=(db.partners||[]).find(x=>x.id===id);if(!p)return;
+  const allEntries=(db.partnerEntries||[]).filter(e=>e.partnerId===id).slice().sort((a,b)=>(a.date||'').localeCompare(b.date||''));
+  const es=month==='all'?allEntries:allEntries.filter(e=>(e.date||'').slice(0,7)===month);
+  const monthOptions=[...new Set(allEntries.map(e=>(e.date||'').slice(0,7)).filter(Boolean))].sort().reverse();
+  const t=partnerTotals(id);
+  const labels={mazot_aldim:'Ben onun için mazot aldım · alacağım',mazot_aldi:'O benim için mazot aldı · borcum',para_verdi:'O bana para verdi · tahsilat',para_verdim:'Ben ona para verdim / borç ödedim',diger_alacak:'Ben onun için masraf yaptım · alacağım',diger_borc:'O benim için masraf yaptı · borcum',alacak:'Onun için masraf yaptım · alacağım',borc:'O benim için masraf yaptı · borcum',tahsilat:'Bana ödeme yaptı',odeme:'Ona ödeme yaptım'};
+  $("app").innerHTML=`<div class="card"><button class="action-btn" onclick="notes()">← Not Defterlerine Dön</button><h2>📒 ${esc(p.name)} ile Hesap</h2><p class="muted">Bu sayfa sadece ${esc(p.name)} ile arandaki hesabı tutar.</p><div class="stats"><div class="stat"><span>Benim alacağım</span><b>${money(t.receivable)}</b></div><div class="stat"><span>Benim borcum</span><b>${money(t.payable)}</b></div><div class="stat"><span>Net bakiye</span><b>${money(t.net)}</b></div></div><button class="primary" style="width:100%;margin-top:10px" onclick="addPersonBookEntry('${id}')">＋ Günlük Kayıt Ekle</button></div>
+  <div class="card"><h3>📅 Hareket geçmişi</h3><label>Ay seç</label><select onchange="openPersonBook('${id}',this.value)"><option value="all" ${month==='all'?'selected':''}>Tüm aylar</option>${monthOptions.map(m=>`<option value="${m}" ${month===m?'selected':''}>${m}</option>`).join('')}</select><p class="muted">Gösterilen kayıt: ${es.length}</p>${es.slice().reverse().map(e=>`<div class="workline"><b>${esc(e.date||'Tarihsiz')}</b><br>${esc(labels[e.entryType]||e.kind||'Hareket')}<br>${e.liters?`Mazot: <b>${fmt(e.liters)} litre × ${money(e.price)} = ${money(e.amount)}</b>`:`Tutar: <b>${money(e.amount)}</b>`}${e.note?`<br>${esc(e.note)}`:''}<br><button class="action-btn" onclick="editPersonBookEntry('${e.id}','${id}')">Düzenle</button> <button class="danger" onclick="deletePersonBookEntry('${e.id}','${id}')">Bu kaydı sil</button></div>`).join('')||'<div class="empty">Bu ayda kayıt yok.</div>'}</div>`;
+}
+function addPersonBookEntry(id){
+  const p=(db.partners||[]).find(x=>x.id===id);if(!p)return;
+  let kind=prompt(p.name+' ile hesap — kayıt türünü seç:\n1 = Ben onun için mazot aldım (alacağım)\n2 = O benim için mazot aldı (borcum)\n3 = O bana para verdi\n4 = Ben ona para verdim\n5 = Ben onun için başka masraf yaptım\n6 = O benim için başka masraf yaptı','1');if(kind===null)return;
+  const map={'1':'alacak','2':'borc','3':'tahsilat','4':'odeme','5':'alacak','6':'borc'};if(!map[kind])return alert('1 ile 6 arasında seçim yap.');
+  let liters=0,price=0,amount=0;
+  if(kind==='1'||kind==='2'){liters=Number(prompt('Mazot kaç litre?','80'));if(!Number.isFinite(liters)||liters<=0)return alert('Geçerli litre gir.');price=Number(prompt('Litre fiyatı (TL)?','58'));if(!Number.isFinite(price)||price<=0)return alert('Geçerli fiyat gir.');amount=Math.round(liters*price*100)/100;}
+  else {amount=Number(prompt('Tutar (TL)?','2000'));if(!Number.isFinite(amount)||amount<=0)return alert('Geçerli tutar gir.');}
+  const date=prompt('Tarih (YYYY-AA-GG):',new Date().toISOString().slice(0,10));if(date===null)return;
+  const note=prompt('Açıklama (isteğe bağlı):','')||'';
+  db.partnerEntries=db.partnerEntries||[];db.partnerEntries.push({id:uid(),partnerId:id,kind:map[kind],entryType:({'1':'mazot_aldim','2':'mazot_aldi','3':'para_verdi','4':'para_verdim','5':'diger_alacak','6':'diger_borc'})[kind],liters,price,amount,note,date,createdAt:Date.now()});save();openPersonBook(id);
+}
+function editPersonBookEntry(entryId,partnerId){
+ const e=(db.partnerEntries||[]).find(x=>x.id===entryId);if(!e)return;
+ const date=prompt('Tarih (YYYY-AA-GG):',e.date||new Date().toISOString().slice(0,10));if(date===null)return;
+ let liters=Number(e.liters||0),price=Number(e.price||0),amount=Number(e.amount||0);
+ if(liters>0){const l=prompt('Mazot litresi:',String(liters));if(l===null)return;liters=Number(l);if(!Number.isFinite(liters)||liters<=0)return alert('Geçerli litre gir.');const pr=prompt('Litre fiyatı:',String(price));if(pr===null)return;price=Number(pr);if(!Number.isFinite(price)||price<=0)return alert('Geçerli fiyat gir.');amount=Math.round(liters*price*100)/100;}
+ else {const a=prompt('Tutar (TL):',String(amount));if(a===null)return;amount=Number(a);if(!Number.isFinite(amount)||amount<0)return alert('Geçerli tutar gir.');}
+ const note=prompt('Açıklama:',e.note||'');if(note===null)return;e.date=date;e.liters=liters;e.price=price;e.amount=amount;e.note=note;save();openPersonBook(partnerId);
+}
+function deletePersonBookEntry(entryId,partnerId){if(!confirm('Bu günlük hesap kaydı silinsin mi?'))return;db.partnerEntries=(db.partnerEntries||[]).filter(e=>e.id!==entryId);save();openPersonBook(partnerId)}
+
+function addNote(){
+  const title=$("noteTitle").value.trim(),type="Not",date=$("noteDate").value,amount=Number($("noteAmount").value||0),body=$("noteBody").value.trim(),file=$("notePhoto")?.files?.[0];
+  if(!title&&!body&&!file)return alert('Lütfen not başlığı, açıklama veya fotoğraf ekle.');
+  const finish=(photo='')=>{db.notes=db.notes||[];db.notes.push({id:uid(),title:title||'Başlıksız not',type,date,amount,body,photo,createdAt:Date.now()});save();notes();};
+  if(file){if(file.size>3*1024*1024)return alert('Fotoğraf 3 MB altında olmalı.');const reader=new FileReader();reader.onload=()=>finish(String(reader.result||''));reader.onerror=()=>alert('Fotoğraf okunamadı.');reader.readAsDataURL(file);}else finish();
+}
+function editNote(id){
+  const n=(db.notes||[]).find(x=>x.id===id);if(!n)return;
+  const title=prompt('Not başlığı:',n.title||'');if(title===null)return;
+  const body=prompt('Açıklama:',n.body||'');if(body===null)return;
+  const amount=prompt('Tutar (TL), tutar yoksa 0 yaz:',String(n.amount||0));if(amount===null)return;
+  n.title=title.trim()||'Başlıksız not';n.body=body.trim();n.amount=Math.max(0,Number(amount)||0);save();notes();
+}
+function deleteNote(id){if(!confirm('Bu not silinsin mi?'))return;db.notes=(db.notes||[]).filter(n=>n.id!==id);save();notes()}
+
+function backup(){let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(db,null,2)],{type:"application/json"}));a.download="tarla-takip-yedek.json";a.click()}
+function restore(file){if(!file)return;let r=new FileReader();r.onload=()=>{try{db=JSON.parse(r.result);save();render();alert("Yedek geri yüklendi.")}catch(e){alert("Geçersiz yedek.")}};r.readAsText(file)}
+cleanData();save();render();
+
+// Supabase multi-device sync: stores the complete app database as one JSON document per authenticated user.
+const SYNC_URL_KEY='kolucolak_supabase_url_v1', SYNC_PUB_KEY='kolucolak_supabase_publishable_v1';
+function syncStatus(msg){const el=$('sync-status');if(el)el.textContent=msg;}
+function updateSyncUI(){const configured=!!syncClient; if($('sync-config'))$('sync-config').style.display=configured?'none':'grid'; if($('sync-auth'))$('sync-auth').style.display=configured?'grid':'none';}
+function initSync(){const url=localStorage.getItem(SYNC_URL_KEY)||'', key=localStorage.getItem(SYNC_PUB_KEY)||''; if($('sync-url'))$('sync-url').value=url; if($('sync-key'))$('sync-key').value=key; if(!url||!key||!window.supabase?.createClient){updateSyncUI(); if(url&&key)syncStatus('Supabase kütüphanesi yüklenemedi. İnternet bağlantını kontrol et.'); return;} try{syncClient=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});updateSyncUI();syncStatus('Bağlantı hazır. E-posta ile giriş yap veya hesap oluştur.');syncClient.auth.onAuthStateChange((event,session)=>{setTimeout(()=>{syncUser=session?.user||null;if(syncUser){syncReady=false;loadCloudData();}else{syncReady=false;syncStatus('Oturum kapalı. Eşitlemek için giriş yap.');if(syncChannel){syncClient.removeChannel(syncChannel);syncChannel=null;}}},0);});syncClient.auth.getSession().then(({data,error})=>{if(error)syncStatus('Oturum kontrolü: '+error.message);syncUser=data?.session?.user||null;if(syncUser)loadCloudData();});}catch(e){syncClient=null;updateSyncUI();syncStatus('Bağlantı ayarları kontrol edilemedi: '+e.message);}}
+function saveSyncConfig(){const url=$('sync-url').value.trim().replace(/\/$/,''),key=$('sync-key').value.trim();if(!/^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(url))return alert('Project URL https://....supabase.co biçiminde olmalı.');if(!key.startsWith('sb_publishable_')&&!key.startsWith('eyJ'))return alert('Publishable key değerini kontrol et. Secret/service_role anahtarı kullanma.');localStorage.setItem(SYNC_URL_KEY,url);localStorage.setItem(SYNC_PUB_KEY,key);syncClient=null;initSync();}
+async function signInSync(){if(!syncClient)return alert('Önce Supabase bağlantısını kaydet.');const email=$('sync-email').value.trim(),password=$('sync-password').value;if(!email||!password)return alert('E-posta ve şifre gir.');syncStatus('Giriş yapılıyor…');const {error}=await syncClient.auth.signInWithPassword({email,password});if(error){syncStatus('Giriş başarısız: '+error.message);return;}syncStatus('Giriş başarılı; kayıtlar eşitleniyor…');}
+async function signUpSync(){if(!syncClient)return alert('Önce Supabase bağlantısını kaydet.');const email=$('sync-email').value.trim(),password=$('sync-password').value;if(!email||password.length<6)return alert('Geçerli e-posta ve en az 6 karakterli şifre gir.');syncStatus('Hesap oluşturuluyor…');const {data,error}=await syncClient.auth.signUp({email,password});if(error){syncStatus('Hesap oluşturulamadı: '+error.message);return;}if(!data.session){syncStatus('Hesap oluşturuldu. E-posta doğrulama mesajını kontrol et; doğruladıktan sonra giriş yap.');return;}syncStatus('Hesap oluşturuldu; kayıtlar eşitleniyor…');}
+async function signOutSync(){if(syncClient)await syncClient.auth.signOut();syncUser=null;syncReady=false;syncStatus('Oturum kapatıldı.');}
+async function loadCloudData(){if(!syncClient||!syncUser)return;syncStatus('Buluttaki kayıtlar kontrol ediliyor…');try{const {data,error}=await syncClient.from('user_data').select('data,updated_at').eq('user_id',syncUser.id).maybeSingle();if(error)throw error;if(data&&data.data&&typeof data.data==='object'){syncApplying=true;db={...data.data};db.customers=db.customers||[];db.fields=db.fields||[];db.machines=db.machines||[];db.works=db.works||[];db.transactions=db.transactions||[];db.notes=db.notes||[];db.partners=db.partners||[];db.partnerEntries=db.partnerEntries||[];cleanData();localStorage.setItem(KEY,JSON.stringify(db));render();syncApplying=false;syncReady=true;syncStatus('☁️ Buluttaki kayıtlar yüklendi. Bu cihaz hesabınla eşitleniyor.');}else{syncReady=true;await pushCloudData();syncStatus('☁️ Bu hesapta henüz kayıt yoktu; bu cihazdaki kayıtlar buluta aktarıldı.');}
+if(syncChannel)syncClient.removeChannel(syncChannel);syncChannel=syncClient.channel('user-data-'+syncUser.id).on('postgres_changes',{event:'*',schema:'public',table:'user_data',filter:'user_id=eq.'+syncUser.id},payload=>{const remote=payload.new?.data;if(!remote||syncApplying||JSON.stringify(remote)===JSON.stringify(db))return;syncApplying=true;db={...remote};db.customers=db.customers||[];db.fields=db.fields||[];db.machines=db.machines||[];db.works=db.works||[];db.transactions=db.transactions||[];db.notes=db.notes||[];db.partners=db.partners||[];db.partnerEntries=db.partnerEntries||[];cleanData();localStorage.setItem(KEY,JSON.stringify(db));render();syncApplying=false;syncStatus('☁️ Diğer cihazdan gelen değişiklik alındı.');}).subscribe();}catch(e){syncApplying=false;syncReady=false;syncStatus('Senkronizasyon hatası: '+(e.message||e)+' — SQL kurulumunun tamamlandığını ve API ayarlarını kontrol et.');}}
+function scheduleCloudSave(){clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushCloudData(),650);}
+async function pushCloudData(){if(!syncClient||!syncUser||!syncReady||syncApplying)return;try{syncStatus('Değişiklikler buluta kaydediliyor…');const {error}=await syncClient.from('user_data').upsert({user_id:syncUser.id,data:db,updated_at:new Date().toISOString()},{onConflict:'user_id'});if(error)throw error;syncStatus('☁️ Senkronize edildi. Diğer cihazlarda aynı hesapla açabilirsin.');}catch(e){syncStatus('Buluta kaydedilemedi: '+(e.message||e));}}
+async function syncNow(){if(!syncClient||!syncUser)return alert('Önce bağlantıyı kaydet ve giriş yap.');await loadCloudData();}
+initSync();
+</script></body></html>
